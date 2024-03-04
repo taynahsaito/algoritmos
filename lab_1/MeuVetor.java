@@ -119,4 +119,26 @@ public class MeuVetor {
             add(r.nextInt(v.length*10)+1); //os metodos da classe random não são estáticos, então precisamos instânciá-los
         }
     }
+     //sobrecarga do método acima 
+    public void preencheVetor(int limite) {
+        Random r = new Random();
+        for (int i=0; i<v.length; i++){
+            add(r.nextInt(limite)); 
+        }
+    }
+    //bubblesort é eficaz, mas não é eficiente(pois demora bastante - tem desempenho quadratico)
+    public int bubbleSort (){
+        int cont = 0;
+        for(int i = 1; i<v.length; i++){
+            for (int j=0; j<v.length-1; j++){
+                cont++;
+                if(v[j] > v[j+1]){
+                    double aux = v[j];
+                    v[j] = v[j+1];
+                    v[j+1] = aux;
+                }
+            }
+        }
+        return cont;
+    }
 }
