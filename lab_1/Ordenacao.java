@@ -1,10 +1,12 @@
 import java.util.Scanner;
 import java.util.Date;
 
+
+
 public class Ordenacao {
     public static void main(String[] args) {
         int tamanho;
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in); //temos que inicializar o objeto e fecha-lo depois
         MeuVetor v1;
 
         System.out.print("digite o tamanho do vetor, 0 encerra: ");

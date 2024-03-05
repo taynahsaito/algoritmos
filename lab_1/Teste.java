@@ -26,7 +26,7 @@ public class Teste {
 
         while (!v1.estaVazio()) { //while not v1.estaVszio
             v1.remove();
-            System.out.println("capacidade atual: " + v1.getV().length);
+            System.out.println("capacidade atual: " + v1.getV().length); //quando chamamos o metodo getV, temos como retorno a ref na memoria do vetor v
         }
     }
     //classe pai do java é o object

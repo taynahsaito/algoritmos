@@ -97,7 +97,7 @@ public class MeuVetor {
     }
 
 
-    @Override //aviso para o desenvolvedor que não pode mexer na assinatura (public String toString()) do método, o conteudo do metodo pode ser mudado
+    @Override //aviso para o desenvolvedor que não pode mexer na assinatura (public String toString()) do método, ja que queremos que haja sobrescrita, mas o conteudo do metodo pode ser mudado
     public String toString() {
         String s = ""; //criamos a string pois precisamos devolvê-la depois
         if (estaVazio()){
@@ -126,11 +126,11 @@ public class MeuVetor {
             add(r.nextInt(limite)); 
         }
     }
-    //bubblesort é eficaz, mas não é eficiente(pois demora bastante - tem desempenho quadratico)
-    public int bubbleSort (){
+    //bubblesort é eficaz, mas não é eficiente(pois demora bastante - tem desempenho quadratico - com um volume muito grande de dados o desempenho dele nao e tao bom)
+    public int bubbleSort (){ // o bubblesort é um algoritmo de ORDENACAO estavel pois valores iguais permanecem na mesma posição sem troca
         int cont = 0;
         for(int i = 1; i<v.length; i++){
-            for (int j=0; j<v.length-1; j++){
+            for (int j=0; j<v.length-i; j++){
                 cont++;
                 if(v[j] > v[j+1]){
                     double aux = v[j];
@@ -140,5 +140,41 @@ public class MeuVetor {
             }
         }
         return cont;
+    }
+
+    public Retorno buscaSimples (double x){
+        Retorno r = new Retorno();
+        for (int i=0; i<=ultimaPos; i++){
+            r.incrementaContador();
+            if(x == v[i]) {
+                r.setAchou(true);
+                return r;
+            }
+        }
+        return r;
+    }
+
+
+    //o contador só esta aqui porque estamos estudado desempenho da memoria - em codigos puros não há contador.
+    public Retorno buscaBinaria(double x){
+        int inicio =0, fim = ultimaPos;
+        int meio; //é calculado em cada interação
+        Retorno r = new Retorno();
+
+        while (inicio<=fim) {
+            meio = (inicio+fim)/2;
+            r.incrementaContador();
+            if (x == v[meio]){
+                r.setAchou(true);
+                return r; // como tem retorno no if, não precisa do else.
+            }
+            if (x > v[meio]){
+                inicio = meio + 1;
+            }
+            else {
+                fim = meio - 1;
+            }
+        }
+        return r;
     }
 }
