@@ -77,14 +77,69 @@ public class MeuVetor {
         v[++ultimaPos] = elemento;
     }
 
+    public void add (double elemento, int posicao){
+        if (estaCheio()){
+            redimensiona(v.length*2);
+        }
+        if (posicao > ultimaPos){
+            v[++ultimaPos] = elemento; // atualização da ultima posição
+        }
+        else {
+            //deslocar elementos - do ultimo para trás
+            int i;
+            for (i = ultimaPos+1; i >= posicao; i--){
+                v[i] = v[i - 1];
+            }
+        v[i] = elemento;
+        ultimaPos++;
+        }
+    }
+
     //metodo para remover elemento/espaço do vetor
     public double remove () {
         if (estaVazio()) return 0; //não faz nada
         double aux = v[ultimaPos--]; 
-        if (v.length>= 10 && ultimaPos <= v.length/4) { //se for menor que 10, nao conseguimos redimensionar mais, pois há o numero 0
+        if (v.length >= 10 && ultimaPos <= v.length/4) { //se for menor que 10, nao conseguimos redimensionar mais, pois há o numero 0
             redimensiona(v.length/2);
         }
         return aux; //retorna o elemento tirado da ultima posição
+    }
+
+    public double remove (int posicao){
+        if (estaVazio() || posicao > ultimaPos){
+            return 0;
+        }
+        double aux = v[posicao];
+        for (int i = posicao; i < ultimaPos; i++){
+            v[i] = v[i+1];
+        }
+        ultimaPos--;
+        if (v.length >= 10 && ultimaPos <= v.length/4) { //se for menor que 10, nao conseguimos redimensionar mais, pois há o numero 0
+            redimensiona(v.length/2);
+        }
+        return aux;
+    }
+
+    //remover todas as ocorrencias de um elemento x em um vetor não ordenado
+    public int remove (double elemento){
+        if (estaVazio()){
+            return 0;
+        }
+        int cont = 0;
+        for (int i=ultimaPos; i>=0; i--){
+            if (v[i] == elemento){
+                //arrasta
+                for (int j = i; j < ultimaPos; j++){
+                    v[j] = v[j+1];
+                }
+                ultimaPos--;
+                cont++;
+            }
+        }
+        if (v.length >= 10 && ultimaPos <= v.length/4) { //se for menor que 10, nao conseguimos redimensionar mais, pois há o numero 0
+            redimensiona(v.length/2);
+        }
+        return cont;
     }
 
     //método para redimensionar o vetor para uma nova capacidade
@@ -126,7 +181,7 @@ public class MeuVetor {
             add(r.nextInt(limite)); 
         }
     }
-    //bubblesort é eficaz, mas não é eficiente(pois demora bastante - tem desempenho quadratico - com um volume muito grande de dados o desempenho dele nao e tao bom)
+    //bubblesort é eficaz, mas não é eficiente(pois demora bastante - tem desempenho quadratico, com um volume muito grande de dados o desempenho dele nao e tao bom)
     public int bubbleSort (){ // o bubblesort é um algoritmo de ORDENACAO estavel pois valores iguais permanecem na mesma posição sem troca
         int cont = 0;
         for(int i = 1; i<v.length; i++){
