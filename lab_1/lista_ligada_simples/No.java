@@ -18,7 +18,7 @@ public class No{
     }
 
     public void setInfo(int info){
-        this.info = info;
+        this.info = info;  //this.info é o atributo da classe; só info é o parâmetro
     }
 
     public void setProximo(No proximo){
@@ -30,3 +30,7 @@ public class No{
         return "|" + info + "|->";
     }
 }
+
+// quanto mais operações, maior a memória e o processamento, mas também pode facilitar algumas operações
+//tipo de lista por trás de um carrossel: lista circular dupla (a ultima liga à primeira e você pode ir para frente e para trás)
+//usamos a definição recursiva de tipos para alocar atributos do tipo No;
